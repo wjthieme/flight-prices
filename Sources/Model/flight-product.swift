@@ -2,4 +2,6 @@
 
 import Foundation
 
-print("Hello world")
+struct FlightProduct: Codable {
+    
+}
