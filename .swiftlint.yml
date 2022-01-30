@@ -1,0 +1,10 @@
+excluded:
+  - .build
+  
+disabled_rules:
+  - line_length
+  - shorthand_operator
+
+identifier_name:
+  min_length: 1
+  validates_start_with_lowercase: false

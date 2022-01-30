@@ -67,7 +67,7 @@ final public class ApiImpl: NSObject, Api {
             error = aError
             semaphore.signal()
         }.resume()
-        semaphore.wait()
+        _ = semaphore.wait(timeout: .distantFuture)
 
         if let error = error { throw error }
         guard let httpResponse = response as? HTTPURLResponse else { throw ApiError.emptyResponse() }
@@ -118,4 +118,3 @@ public protocol Endpoint {
     var endpoint: String { get }
     var payload: Request { get }
 }
-

@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Itenerary: Codable {
+struct Itinerary: Codable {
     let connections: [Connection]
-    let flightProducts: [FlightProduct]
+    let flightProducts: [Product]
 }
