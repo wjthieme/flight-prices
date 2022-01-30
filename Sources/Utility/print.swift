@@ -1,9 +1,9 @@
 //  Copyright © 2021 Wilhelm Thieme
 import Foundation
 #if os(Linux)
-    import Glibc
+import Glibc
 #else
-    import Darwin.C
+import Darwin.C
 #endif
 
 public func print(_ object: Any, terminate: Bool = true) {

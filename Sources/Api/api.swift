@@ -1,6 +1,9 @@
 //  Copyright © 2021 Wilhelm Thieme
 
 import Foundation
+#if os(Linux)
+import FoundationNetworking
+#endif
 
 public protocol Api {
     func request<T: Endpoint>(_ endpoint: T) throws -> T.Response
