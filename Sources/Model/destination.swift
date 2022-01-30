@@ -3,17 +3,11 @@
 import Foundation
 
 struct Destination: Codable {
-    let airport: Location
+    let airport: Location?
+    let city: Location?
 
     init(_ code: String) {
         self.airport = Location(code)
-    }
-}
-
-struct Location: Codable {
-    let code: String
-
-    init(_ code: String) {
-        self.code = code
+        self.city = nil
     }
 }

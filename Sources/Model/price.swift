@@ -3,11 +3,11 @@
 import Foundation
 
 struct Price: Codable {
-    let displayPrice: Float
-    let totalPrice: Float
-    let currency: String
-    let displayType: PriceType
-    let surcharges: [Surcharge]
+    let displayPrice: Float?
+    let totalPrice: Float?
+    let currency: String?
+    let displayType: PriceType?
+    let surcharges: [Surcharge]?
 }
 
 enum PriceType: String, Codable {

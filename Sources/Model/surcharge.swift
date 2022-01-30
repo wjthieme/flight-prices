@@ -3,6 +3,6 @@
 import Foundation
 
 struct Surcharge: Codable {
-    let code: String
-    let amount: Float
+    let code: String?
+    let amount: Float?
 }

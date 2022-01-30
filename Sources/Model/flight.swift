@@ -3,8 +3,8 @@
 import Foundation
 
 struct Flight: Codable {
-    let number: String
-    let carrier: String
+    let number: String?
+    let carrier: String?
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

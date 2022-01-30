@@ -7,7 +7,7 @@ struct RootCommand: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "flight-prices",
         abstract: "Command line tool for getting KLM/AirFrance flight prices.",
-        subcommands: [FindCommand.self]
+        subcommands: [FindCommand.self, LookupCommand.self]
     )
 }
 

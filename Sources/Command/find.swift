@@ -36,7 +36,7 @@ struct FindCommand: SubCommand {
         let flightPrices = flightDates.mapWithProgress(cheapestFlight)
         let amount = min(10, flightPrices.count)
         let indexes = flightPrices.enumerated().sorted(by: { $0.element < $1.element }).map({ $0.offset })[0..<amount]
-        indexes.forEach({ print("\(flightPrices[$0]): \(flightDates[$0])") })
+        indexes.forEach({ print("\(flightPrices[$0])EUR \(flightDates[$0])") })
     }
 
     private func dates() -> [(outbound: JustDate, inbound: JustDate)] {
@@ -47,24 +47,12 @@ struct FindCommand: SubCommand {
     }
 
     private func cheapestFlight(outboundDate: JustDate, inboundDate: JustDate) -> Float {
-        let outboundFlight = Route(origin: origin, destination: destination, date: outboundDate)
-        let inboundFlight = Route(origin: destination, destination: origin, date: inboundDate)
-        let endpoint = AvailableOffers(cabins: [cabinClass], passengers: passengers, route: [outboundFlight, inboundFlight])
+        let outboundFlight = Connection(origin: origin, destination: destination, date: outboundDate)
+        let inboundFlight = Connection(origin: destination, destination: origin, date: inboundDate)
+        let endpoint = AvailableOffers(cabins: [cabinClass], passengers: travellers.passengers, route: [outboundFlight, inboundFlight])
         guard let response = try? api.request(endpoint) else { return Float.infinity }
-        guard let cheapestItinerary = response.itineraries.min(by: priceComparator) else { return Float.infinity }
-        return price(for: cheapestItinerary)
-    }
-
-    private func priceComparator(_ first: Itinerary, second: Itinerary) -> Bool {
-        return price(for: first) < price(for: second)
-    }
-
-    private func price(for itinerary: Itinerary) -> Float {
-        return itinerary.flightProducts.map({ $0.price.totalPrice }).reduce(0, +)
-    }
-
-    private var passengers: [Passenger] {
-        return (0..<travellers.count).map({ Passenger(id: $0, type: travellers[$0]) })
+        guard let cheapestItinerary = response.itineraries.min(by: { $0.price < $1.price }) else { return .infinity }
+        return cheapestItinerary.price
     }
 
 }
