@@ -3,7 +3,7 @@
 import Foundation
 
 extension Collection {
-    
+
     func mapWithProgress<T>(_ block: (Element) -> T?) -> [T] {
         var result: [T?] = .init(repeating: nil, count: count)
         print(bar(0), terminate: false)
@@ -17,8 +17,8 @@ extension Collection {
 
     private func bar(_ perc: Float, length: Int = 25) -> String {
         let filledLength = Int(perc * Float(length))
-        let unfilled = [">"] + Array<String>(repeating: " ", count: length-1)
-        let filled = Array<String>(repeating: "-", count: filledLength)
+        let unfilled = [">"] + [String](repeating: " ", count: length-1)
+        let filled = [String](repeating: "-", count: filledLength)
         let bar = filled + unfilled[0..<length-filledLength]
         let percentage = Int(perc * 100)
         return " [\(bar.joined())] - \(percentage)%"

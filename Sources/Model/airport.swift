@@ -17,5 +17,3 @@ struct Location: Codable {
         self.code = code
     }
 }
-
-

@@ -1,8 +1,8 @@
 import XCTest
-@testable import flight_prices
+@testable import FlightPrices
 
-final class flight_pricesTests: XCTestCase {
+final class Tests: XCTestCase {
     func testExample() throws {
-//   
+//
     }
 }
