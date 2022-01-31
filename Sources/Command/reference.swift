@@ -31,7 +31,7 @@ struct LookupCommand: SubCommand {
         let inboundFlight = Connection(origin: destination, destination: origin)
         let endpoint = LowestFare(cabins: [cabinClass], passengers: travellers.passengers, route: [outboundFlight, inboundFlight])
         let response = try api.request(endpoint)
-        guard let itinerary = response.itineraries.min(by: { $0.price < $1.price }) else { throw NSError() }
+        guard let itinerary = response.itineraries.min(by: { $0.price < $1.price }) else { throw ReferenceError.noReferencePriceFound() }
         printFlights(in: itinerary)
     }
 
@@ -50,4 +50,8 @@ struct LookupCommand: SubCommand {
         }
         print("\(itinerary.price)EUR")
     }
+}
+
+enum ReferenceError: EnumError {
+    case noReferencePriceFound(Void = ())
 }
