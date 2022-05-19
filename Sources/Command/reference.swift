@@ -26,7 +26,7 @@ struct LookupCommand: SubCommand {
     }
 
     func run() throws {
-        print("Finding the lowest fare for flights from \(origin) to \(destination):")
+        print("Finding a reference fare for flights from \(origin) to \(destination):")
         let outboundFlight = Connection(origin: origin, destination: destination)
         let inboundFlight = Connection(origin: destination, destination: origin)
         let endpoint = LowestFare(cabins: [cabinClass], passengers: travellers.passengers, route: [outboundFlight, inboundFlight])
